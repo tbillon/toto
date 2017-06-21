@@ -6,8 +6,9 @@ pipeline {
     SUBDIR = 'subdir'
   }
   stages {
-    stage('Clone something') {
+    stage('Setup') {
       steps {
+        deleteDir
         dir("${SUBDIR}") {
           git 'https://github.com/brmzkw/conf.git'
         }
@@ -18,6 +19,10 @@ pipeline {
       steps {
         parallel(
           'thread1': {
+            directory = sh(
+              script: 'mktemp -d'
+              returnStdout: true
+            )
             dir("${SUBDIR}") {
               sh 'pwd'
               sh 'echo plip >>plop'
