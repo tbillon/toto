@@ -13,6 +13,7 @@ pipeline {
         dir('kernel') {
           git 'https://github.com/brmzkw/conf.git'
         }
+      }
     }
     stage('Show where we are') {
       steps {
