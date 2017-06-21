@@ -2,13 +2,17 @@ pipeline {
   agent {
       label 'x86_64'
   }
+  environment {
+    SUBDIR = 'subdir'
+  }
   stages {
     stage('Clone something') {
       steps {
         sh 'pwd'
         sh 'tree -a'
-        git 'https://github.com/brmzkw/conf.git'
-      }
+        dir($SUBDIR) {
+          git 'https://github.com/brmzkw/conf.git'
+        }
     }
     stage('Show where we are') {
       steps {
