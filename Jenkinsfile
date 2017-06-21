@@ -34,6 +34,7 @@ pipeline {
     }
     stage('Check stuff') {
       steps {
+        sh 'env'
         sh 'pwd'
         sh 'tree -a'
         dir("${SUBDIR}") {
