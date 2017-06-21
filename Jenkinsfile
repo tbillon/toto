@@ -11,6 +11,7 @@ pipeline {
         dir("${SUBDIR}") {
           git 'https://github.com/brmzkw/conf.git'
         }
+        sh 'tree -a'
       }
     }
     stage('Explore') {
@@ -34,7 +35,10 @@ pipeline {
     stage('Check stuff') {
       steps {
         sh 'pwd'
-        sh 'tree'
+        sh 'tree -a'
+        dir("${SUBDIR}") {
+          sh 'cat plop'
+        }
       }
     }
   }
