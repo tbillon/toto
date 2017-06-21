@@ -14,23 +14,25 @@ pipeline {
       }
     }
     stage('Explore') {
-      steps {
-        parallel(
-          'thread1': {
-            dir("${SUBDIR}") {
-              sh 'pwd'
-              sh 'echo plip >>plop'
-            }
-          },
-          'thread2': {
-            dir("${SUBDIR}") {
-              sh 'pwd'
-              sh 'echo plup >>plop'
-            }
+      parallel(
+        'thread1': {
+          dir("${SUBDIR}") {
+            sh 'pwd'
+            sh 'echo plip >>plop'
           }
-        )
+        },
+        'thread2': {
+          dir("${SUBDIR}") {
+            sh 'pwd'
+            sh 'echo plup >>plop'
+          }
+        }
+      )
+    }
+    stage('Check stuff') {
+      steps {
+        sh 'pwd'
         sh 'tree'
-        sh 'cat ${SUBDIR}/plop'
       }
     }
   }
