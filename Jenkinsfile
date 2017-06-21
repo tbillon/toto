@@ -5,13 +5,16 @@ pipeline {
   stages {
     stage('Clone something') {
       steps {
-         git 'https://github.com/brmzkw/conf.git'
+        sh 'pwd'
+        sh 'ls -al'
+        git 'https://github.com/brmzkw/conf.git'
       }
     }
     stage('Show where we are') {
       steps {
         sh 'env'
-        sh 'ls -al'
+        sh 'pwd'
+        sh 'ls -al *'
       }
     }
   }
