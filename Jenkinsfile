@@ -8,18 +8,29 @@ pipeline {
   stages {
     stage('Clone something') {
       steps {
-        sh 'pwd'
-        sh 'tree -a'
         dir("${SUBDIR}") {
           git 'https://github.com/brmzkw/conf.git'
         }
       }
     }
-    stage('Show where we are') {
+    stage('Explore') {
       steps {
-        sh 'env'
-        sh 'pwd'
-        sh 'tree -a'
+        parallel(
+          'thread1': {
+            dir("${SUBDIR}") {
+              sh 'pwd'
+              sh 'echo plip >>plop'
+            }
+          },
+          'thread1': {
+            dir("${SUBDIR}") {
+              sh 'pwd'
+              sh 'echo plup >>plop'
+            }
+          }
+        )
+        sh 'tree'
+        sh 'cat ${SUBDIR}/plop'
       }
     }
   }
