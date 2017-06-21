@@ -6,7 +6,7 @@ pipeline {
     stage('Clone something') {
       steps {
         sh 'pwd'
-        sh 'ls -al'
+        sh 'tree -a'
         git 'https://github.com/brmzkw/conf.git'
       }
     }
@@ -14,7 +14,7 @@ pipeline {
       steps {
         sh 'env'
         sh 'pwd'
-        sh 'ls -al *'
+        sh 'tree -a'
       }
     }
   }
