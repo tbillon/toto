@@ -10,7 +10,7 @@ pipeline {
       steps {
         sh 'pwd'
         sh 'tree -a'
-        dir('kernel') {
+        dir("${SUBDIR}") {
           git 'https://github.com/brmzkw/conf.git'
         }
       }
