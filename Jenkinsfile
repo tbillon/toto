@@ -22,7 +22,7 @@ pipeline {
               sh 'echo plip >>plop'
             }
           },
-          'thread1': {
+          'thread2': {
             dir("${SUBDIR}") {
               sh 'pwd'
               sh 'echo plup >>plop'
