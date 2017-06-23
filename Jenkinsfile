@@ -1,50 +1,18 @@
 pipeline {
-  agent {
-      label 'x86_64'
-  }
-  environment {
-    SUBDIR = 'subdir'
-  }
+  agent any
+
   stages {
-    stage('Setup') {
+    stage('Create test bootscript') {
       steps {
-        deleteDir
-        dir("${SUBDIR}") {
-          git 'https://github.com/brmzkw/conf.git'
-        }
-        sh 'tree -a'
-      }
-    }
-    stage('Explore') {
-      steps {
-        parallel(
-          'thread1': {
-            directory = sh(
-              script: 'mktemp -d'
-              returnStdout: true
-            )
-            dir("${SUBDIR}") {
-              sh 'pwd'
-              sh 'echo plip >>plop'
-            }
-          },
-          'thread2': {
-            dir("${SUBDIR}") {
-              sh 'pwd'
-              sh 'echo plup >>plop'
-            }
-          }
+        json_message = sh(
+          script: './request_json.sh ${BUILD_BRANCH} ${BUILD_NUMBER}',
+          returnStdout: true
         )
-      }
-    }
-    stage('Check stuff') {
-      steps {
-        sh 'env'
-        sh 'pwd'
-        sh 'tree -a'
-        dir("${SUBDIR}") {
-          sh 'cat plop'
-        }
+        bootscript = input(
+          message: '${}',
+          parameters: [string(name: 'bootscript_id', description: 'ID of the created bootscript')]
+        )
+        echo 'received bootscript ID: ${bootscript}'
       }
     }
   }
