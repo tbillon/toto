@@ -12,10 +12,18 @@ test_start() {
     scw run -d --commercial-type="$commercial_type" --bootscript="$bootscript" "$test_image"
 }
 
+test_dummy_start() {
+    echo "15151515"
+}
+
 test_stop() {
     server=$1
 
     scw rm -f $server
 }
 
-test_$action "$@"
+test_dummy_stop() {
+    echo "15151515"
+}
+
+test_dummy_$action "$@"
