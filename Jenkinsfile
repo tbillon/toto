@@ -39,7 +39,7 @@ pipeline {
         }
       }
     }
-    stage('Compile kernel: x86_64') {
+/*    stage('Compile kernel: x86_64') {
       steps {
         dir("x86_64") {
           dir("release") {
@@ -90,7 +90,7 @@ pipeline {
           sh "make -C '${WORKSPACE}' linux TARGET_ARCH=arm64 KERNEL_SRC_DIR='${WORKSPACE}/arm64/kernel' BUILD_DIR='${WORKSPACE}/arm64/build' RELEASE_DIR='${WORKSPACE}/arm64/release'"
         }
       }
-    }
+    }*/
     stage('Archive kernels') {
       steps {
         archive includes: '*/release/**'
