@@ -1,5 +1,7 @@
 pipeline {
-  agent any
+  agent {
+    label 'master||worker'
+  }
 
   parameters {
     string(name: 'buildBranch', description: 'Kernel branch to test and release')
